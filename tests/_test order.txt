@@ -1,0 +1,7 @@
+TestOpenCV
+	TestOpenCV.pro : OK pour raphael
+	TestWebCam.pro : OK pour raphael
+TestWebCamQT
+	TestWebCamQT.pro : OK pour raphael
+TestDetectMotion
+	TestDetectMotion.pro : OK pour raphael
