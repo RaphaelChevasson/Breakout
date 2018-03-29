@@ -5,15 +5,9 @@
 #include <cstdio>
 #include <iostream>
 
-/* original @autor SimonMure
- * modified by RaphaelChevasson
- */
-
 using namespace cv;
 using namespace std;
 
-
-VideoCapture * webCam_;
 
 int main(int, char**)
 {
@@ -23,52 +17,26 @@ int main(int, char**)
     int subImageHeight=100;
     int templateWidth=25;
     int templateHeight=25;
-    Rect workingRect((frameWidth-subImageWidth)/2,
-                     frameHeight/2+(frameHeight/2-subImageHeight)/2,
-                     subImageWidth,subImageHeight);
-    Rect templateRect((workingRect.width-templateWidth)/2,
-                      (workingRect.height-templateHeight)/2,
-                      templateWidth,templateHeight);
-    Point workingCenter(workingRect.x+subImageWidth/2,
-                        workingRect.y+subImageHeight/2);
+    Rect workingRect((frameWidth-subImageWidth)/2,frameHeight/2+(frameHeight/2-subImageHeight)/2,subImageWidth,subImageHeight);
+    Rect templateRect((workingRect.width-templateWidth)/2,(workingRect.height-templateHeight)/2,templateWidth,templateHeight);
+    Point workingCenter(workingRect.x+subImageWidth/2,workingRect.y+subImageHeight/2);
 
-    // /--------------------------------------------------------------------------
-    //   First image ; goal = Create the matchTemplate image result
-
-    webCam_=new VideoCapture(0); // open the default camera
-    int width=webCam_->get(CV_CAP_PROP_FRAME_WIDTH);
-    int height=webCam_->get(CV_CAP_PROP_FRAME_HEIGHT);
-    //webCam_->set(CV_CAP_PROP_FRAME_WIDTH,frameWidth);
-    //webCam_->set(CV_CAP_PROP_FRAME_HEIGHT,frameHeight);
-    if(!webCam_->isOpened())  // check if we succeeded
+    VideoCapture cap(0); // open the default camera
+    cout<<"width :"<<cap.get(CV_CAP_PROP_FRAME_WIDTH)<<endl;
+    cout<<"height :"<<cap.get(CV_CAP_PROP_FRAME_HEIGHT)<<endl;
+    cap.set(CV_CAP_PROP_FRAME_WIDTH,frameWidth);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT,frameHeight);
+    if(!cap.isOpened())  // check if we succeeded
     {
         cerr<<"Error openning the default camera"<<endl;
         return -1;
     }
-    else
-    {
-        cout<<endl<<"Video ok, image is "<<width<<"x"<<height<<endl;
-    }
-
-    namedWindow("WebCam",1);
-    cout<<endl<<"Window created"<<endl;
 
     Mat frame1,frame2,frameRect1,frameRect2;
 
+
     // Get frame1
-    for(;;)
-    {
-        if (webCam_->read(frame1)) {
-            cout<<"First frame captured !"<<endl;
-            imshow("WebCam", frame1);
-            break;
-        }
-        else {
-            cerr<<"Error capturing the first frame"<<endl;
-            cerr<<"retrying..."<<endl;
-            if(waitKey(30) >= 0) break;
-        }
-    }
+    cap >> frame1;
     // Mirror effect
     cv::flip(frame1,frame1,1);
     // Extract rect1 and convert to gray
@@ -81,19 +49,13 @@ int main(int, char**)
     int result_rows = frame1.rows-templateHeight + 1;
     resultImage.create( result_cols, result_rows, CV_32FC1 );
 
-    // \--------------------------------------------------------------------------
-
     // Init output window
     namedWindow("WebCam",1);
-    cout<<endl<<"Window created"<<endl;
-
-    // /--------------------------------------------------------------------------
-    //   Other images ; goal = display and process images
 
    while (waitKey(5)<0)
     {
         // Get frame2
-        *webCam_ >> frame2;
+        cap >> frame2;
         // Mirror effect
         cv::flip(frame2,frame2,1);
         // Extract working rect in frame2 and convert to gray
@@ -120,9 +82,6 @@ int main(int, char**)
         // Swap matrixes
         swap(frameRect1,frameRect2);
     }
-
-    // \--------------------------------------------------------------------------
-
     // the camera will be deinitialized automatically in VideoCapture destructor
     return 0;
 }
