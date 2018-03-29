@@ -1,16 +1,19 @@
 ideas hierarchy is represented using indentation. Please read with notepad++ or sublimText :)
 
 classes (please add a constructor using all fields (including inherited) and a destructor) :
-	GameObject : virtual class
-		fields : x, y, width, height
-		methods : Display(), Destroy()
-	AnimatedObject : virtual class, inherits from GameObject
-		methods : Animate(totalTime, deltaTime)
-	CollidingObject : virtual class, inherits from GameObject
+	DisplayedObject : class with virtual methods
+		fields : manager, x, y, width, height
+		methods : display(), destroy()
+	AnimatedObject : abstract class, inherits from DisplayedObject
+		methods : animate(totalTime, deltaTime)
+	CollidingObject : abstract class, inherits from DisplayedObject
 		fields : isMoving, boundary (a list of points defining the boundary of an object, used to check collision <- assume convexity ?)
 		methods :
 			checkIfItCollidesWith(otherObject) <- is behind all lines made by boundary points (logical AND)
 			applyCollisionEffectTo(otherObject) <- make otherObject bounce (change velocity)
+	ObjectsManager :
+		fields : DisplayedObjects, AnimatedObjects, CollidingObjects
+		methods : displayObjects(), animateObjects(), computeCollisions()
 	InvisibleWall : inherits from CollidingObject
 		fields : point A, point B
 		methods : the boundary, x, y, width and height are determined in constructor thanks to A and B
@@ -19,35 +22,35 @@ classes (please add a constructor using all fields (including inherited) and a d
 	Ball : inherits from AnimatedObject
 		fields player, xSpeed, ySpeed
 		methods :
-			Animate() by adding xSpeed and ySpeed (multiplied by deltaTime to make it FPS-independent) to X and Y
-			Display() by using a spherical quadric
-			Destroy() make the player loose health
+			animate() by adding xSpeed and ySpeed (multiplied by deltaTime to make it FPS-independent) to X and Y
+			display() by using a spherical quadric
+			destroy() make the player loose health
 	Player :
 		fields : game, score, health
 		methods :
-			AddHealth(amount), removeHealth(amount) <- call game's GameOver() if <= 0
+			removeHealth(amount) <- call game's GameOver() if <= 0
 	Paddle : inherits from CollidingObject
 		fields : player, paddleController
 		methods :
 			constructor only needs the width of the paddle
 			applyCollisionEffectTo(otherObject) change the direction as described in the project's subject
-			Animate() use PaddleController()->y (see bellow)
+			animate() use PaddleController()->y (see bellow)
 	Brick : inherits from CollidingObject
 		fields : level, type
 		methods :
-			Destroy() makes player gain score (level->game->player->
+			destroy() makes player gain score (level->game->player->
 				and make level know when it is destroyed (level->BrickDestroyed())
 	Level :
 		fields : game, a list of bricks (updated when bricks are destroyed)
 		methods :
-			Load() : spawn bricks, the paddle and a ball
-			BrickDestroyed() : call game's NextLevel() when there is no bricks left (using a private numberOfBrick counter ?)
+			load() : spawn bricks, the paddle and a ball
+			brickDestroyed() : call game's NextLevel() when there is no bricks left (using a private numberOfBrick counter ?)
 	Game :
 		fields : a list of levels
 		methods :
-			Start() : load first level
-			GameOver() : calls Start() (on click ?)
-			NextLevel() : load next level (using a private levelNumber)
+			start() : load first level
+			gameOver() : calls Start() (on click ?)
+			nextLevel() : load next level (using a private levelNumber)
 	PaddleController() :
 		fields : y (between 0 and 1)
 	DetectMotion : used by the PaddleController
