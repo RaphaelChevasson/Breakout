@@ -10,9 +10,9 @@ class Ball : public AnimatedObject
 {
 public:
     // Constructor
-    Ball(Player *pPlayer,
-             float x, float y, float width, float height,
-             float xSpeed, float ySpeed);
+    Ball(ObjectsManager *pM, Player *pPlayer,
+         float x, float y, float diameter,
+         float xSpeed, float ySpeed);
 
     // Get and set the of the ball, used for collisions
     float getXSpeed(), getYSpeed();
@@ -24,6 +24,9 @@ private:
 
     // Velocity of the ball
     float mXSpeed, mYSpeed;
+
+    // Quadric used to display the ball
+    GLUquadric *mpQuadric;
 
     // Redefined inherited functions
     void animate(float totalTime, float deltaTime);

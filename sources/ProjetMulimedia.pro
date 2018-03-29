@@ -20,17 +20,17 @@ unix {
 TARGET 	  = TD5
 
 # fichiers sources/headers/ressources
-SOURCES += main.cpp myglwidget.cpp planet.cpp \
-    gameobject.cpp \
+SOURCES += main.cpp myglwidget.cpp \
     ball.cpp \
     player.cpp \
-    game.cpp
-HEADERS += myglwidget.h planet.h \
-    gameobject.h \
+    displayedobject.cpp \
+    objectsmanager.cpp
+HEADERS += myglwidget.h \
     animatedobject.h \
     ball.h \
     player.h \
-    game.h
+    displayedobject.h \
+    objectsmanager.h
 
 RESOURCES += \
     textures.qrc

@@ -1,19 +1,19 @@
 #ifndef ANIMATEDOBJECT_H
 #define ANIMATEDOBJECT_H
 
-#include "gameobject.h"
+#include "displayedobject.h"
 
-// GameObject whose position needs to be animated on a regular basis.
+// DisplayedObject whose position needs to be animated on a regular basis.
 // @autor RaphaelChevasson
-class AnimatedObject : public GameObject
+class AnimatedObject : public DisplayedObject
         // virtual helps if one class inherits from both this and
-        // another class inheriting GameObject :
-        // it make the two inherited GameObjects the same.
+        // another class inheriting DisplayedObject :
+        // it make the two inherited DisplayedObject the same.
 {
 public:
     // Constructor
-    AnimatedObject(float x, float y, float width, float height)
-        : GameObject(x, y, width, height)
+    AnimatedObject(ObjectsManager *pM, float x, float y, float width, float height)
+        : DisplayedObject(pM, x, y, width, height)
     {}
 
     // Move the object according to enlapsed time
