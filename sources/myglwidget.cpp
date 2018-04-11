@@ -39,7 +39,14 @@ MyGLWidget::MyGLWidget(QWidget * parent)
     // Connexion du timer
     connect(&m_AnimationTimer,  &QTimer::timeout, [&] {
         m_TimeElapsed += timeSpeed / 100.0f;
+        // Annimation
+        for (AnimatedObject *o : pM->AnimatedObjects) // access by reference to avoid copying
+        {
+            o->animate(m_TimeElapsed, m_TimeElapsed - m_LastTimeElapsed);
+        }
+        // Display
         updateGL();
+        m_LastTimeElapsed = m_TimeElapsed;
     });
 
     m_AnimationTimer.setInterval(10);

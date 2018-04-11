@@ -40,6 +40,7 @@ protected:
 private:
     // Timer d'animation
     float m_TimeElapsed { 0.0f };
+    float m_LastTimeElapsed { 0.0f };
     QTimer m_AnimationTimer;
 };
 

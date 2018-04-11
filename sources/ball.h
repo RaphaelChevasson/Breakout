@@ -14,7 +14,7 @@ public:
          float x, float y, float diameter,
          float xSpeed, float ySpeed);
 
-    // Get and set the of the ball, used for collisions
+    // Get and set the speed of the ball, used for collisions
     float getXSpeed(), getYSpeed();
     float setSpeed(float xSpeed, float ySpeed);
 

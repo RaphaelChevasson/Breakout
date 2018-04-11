@@ -17,7 +17,8 @@ Ball::Ball(ObjectsManager *pM, Player *pPlayer,
 // by deltaTime to make it FPS-independent) to X and Y
 void Ball::animate(float totalTime, float deltaTime)
 {
-
+    mX += mXSpeed * deltaTime;
+    mY += mYSpeed * deltaTime;
 }
 
 // display the ball by using a spherical quadric

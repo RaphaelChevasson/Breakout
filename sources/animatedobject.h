@@ -14,7 +14,9 @@ public:
     // Constructor
     AnimatedObject(ObjectsManager *pM, float x, float y, float width, float height)
         : DisplayedObject(pM, x, y, width, height)
-    {}
+    {
+        mpM->AnimatedObjects.push_back(this);
+    }
 
     // Move the object according to enlapsed time
     virtual void animate(float totalTime, float deltaTime) = 0;
