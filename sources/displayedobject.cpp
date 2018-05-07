@@ -3,8 +3,8 @@
 
 // Constructor.
 // Adds this object in the list of objects to draw
-DisplayedObject::DisplayedObject(ObjectsManager *pM, float x, float y, float width, float height)
-    : mpM(pM), mX(x), mY(y), mWidth(width), mHeight(height)
+DisplayedObject::DisplayedObject(ObjectsManager *pM, float x, float y)
+    : mpM(pM), mX(x), mY(y)
 {
     mpM->DisplayedObjects.push_back(this);
 }

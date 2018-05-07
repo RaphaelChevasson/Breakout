@@ -9,36 +9,37 @@
 #include <QImage>
 
 
-// Classe dediee a l'affichage d'une scene OpenGL
-class MyGLWidget : public QGLWidget
+// Widget dedicated to display the OpenGL game's scene.
+// @autor RaphaelChevasson (modification of OpenGL labs' code)
+class GameGLWidget : public QGLWidget
 {
     Q_OBJECT
 
 public:
-    // Constructeur
-    MyGLWidget(QWidget * parent = nullptr);
+    // Constructor
+    GameGLWidget(QWidget * parent = nullptr);
 
 protected:
-    // Fonction d'initialisation
+    // Initialisation function
     void initializeGL();
 
-    // Fonction de redimensionnement
+    // Resize function
     void resizeGL(int width, int height);
 
-    // Fonction d'affichage
+    // Display function
     void paintGL();
 
-    // Fonction de gestion d'interactions clavier
+    // Keyboard interractions handling fonction
     void keyPressEvent(QKeyEvent * event);
 
-    // Fonctions de gestion d'interactions souris
+    // Mouse nterractions handling fonction
     //void mousePressEvent(QMouseEvent * event);
     //void mouseReleaseEvent(QMouseEvent * event);
     //void wheelEvent(QWheelEvent * event);
     //void mouseMoveEvent(QMouseEvent * event);
 
 private:
-    // Timer d'animation
+    // Animation Timer
     float m_TimeElapsed { 0.0f };
     float m_LastTimeElapsed { 0.0f };
     QTimer m_AnimationTimer;

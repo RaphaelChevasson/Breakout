@@ -7,13 +7,17 @@
 
 #include "objectsmanager.h"
 
+
 // Object which needs to be drawn on the screen on a regular basis.
 // @autor RaphaelChevasson
 class DisplayedObject
 {
 public:
     // Constructor
-    DisplayedObject(ObjectsManager *pM, float x, float y, float width, float height);
+    // @param pM : pointer to the ObjectManager which will manage this object
+    // @param x : x position of the object in the game scene
+    // @param y : y position of the object in the game scene
+    DisplayedObject(ObjectsManager *pM, float x, float y);
 
     // Destructor
     virtual ~DisplayedObject();
@@ -26,14 +30,12 @@ public:
     virtual void destroy();
 
 protected:
-    // Game of the object
+    // ObjectsManager keeping track of all the objects to display.
     ObjectsManager *mpM;
 
-    // Position of the object
+    // Position of the object.
+    // May be used by inherited objects for display placement and animation.
     float mX, mY;
-
-    // Size of the object
-    float mWidth, mHeight;
 };
 
 #endif // DISPLAYEDOBJECT_H

@@ -20,17 +20,24 @@ unix {
 TARGET 	  = TD5
 
 # fichiers sources/headers/ressources
-SOURCES += main.cpp myglwidget.cpp \
+SOURCES += main.cpp \
     ball.cpp \
     player.cpp \
     displayedobject.cpp \
-    objectsmanager.cpp
-HEADERS += myglwidget.h \
+    objectsmanager.cpp \
+    collidingobject.cpp \
+    animatedobject.cpp \
+    limitwall.cpp \
+    gameglwidget.cpp
+HEADERS += \
     animatedobject.h \
     ball.h \
     player.h \
     displayedobject.h \
-    objectsmanager.h
+    objectsmanager.h \
+    collidingobject.h \
+    limitwall.h \
+    gameglwidget.h
 
 RESOURCES += \
     textures.qrc
