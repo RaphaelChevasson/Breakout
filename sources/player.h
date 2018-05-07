@@ -12,6 +12,9 @@ public:
     // Constructor
     Player();
 
+    // bla bla blablabla
+    void removeHealth(int amount);
+
 
 
 };

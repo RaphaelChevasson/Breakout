@@ -10,7 +10,7 @@ class Player; // forward declaration to break circular dependency
 // AnimatedObject representing the current ball of a player.
 // It is also a CollidingObject.
 // @autor RaphaelChevasson
-class Ball : public AnimatedObject, CollidingObject
+class Ball : public AnimatedObject, public CollidingObject
 {
 public:
     // Constructor

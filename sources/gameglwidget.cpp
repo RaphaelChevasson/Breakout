@@ -16,6 +16,7 @@
 #include "player.h"
 #include "ball.h"
 #include "limitwall.h"
+#include "deathwall.h"
 
 
 // Constants declaration :
@@ -113,6 +114,7 @@ void GameGLWidget::initializeGL()
     new LimitWall(pM, -20, -20, -20,  20); // left limit wall  // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
     new LimitWall(pM, -20,  20,  20,  20); // up limit wall    // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
     new LimitWall(pM,  20,  20,  20, -20); // right limit wall // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
+    new DeathWall(pM,  20, -20, -20, -20); // down limit wall  // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
 
     // End of the basic level setup
 }

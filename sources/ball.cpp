@@ -1,5 +1,8 @@
 #include "ball.h"
+
 #include "qdebug.h"
+
+#include "player.h"
 
 // Constructor
 Ball::Ball(ObjectsManager *pM, Player *pPlayer,
@@ -53,10 +56,32 @@ void Ball::display()
     gluSphere(mpQuadric, mDiameter/2, 20, 20); // We draw the quadricr
 }
 
-// make the player loose health
+// make the player loose health and destroy the ball
 void Ball::destroy()
 {
+    // make the player loose health
+    mpPlayer->removeHealth(1);
+    qDebug() << "Aie !";
 
+    // Destroy the ball :
+    // first make sure nobody can access it
+    mpM->DisplayedObjects.erase(
+                std::remove(std::begin(mpM->DisplayedObjects),
+                            std::end(mpM->DisplayedObjects),
+                            this),
+                std::end(mpM->DisplayedObjects));
+    mpM->AnimatedObjects.erase(
+                std::remove(std::begin(mpM->AnimatedObjects),
+                            std::end(mpM->AnimatedObjects),
+                            this),
+                std::end(mpM->AnimatedObjects));
+    mpM->CollidingObjects.erase(
+                std::remove(std::begin(mpM->CollidingObjects),
+                            std::end(mpM->CollidingObjects),
+                            this),
+                std::end(mpM->CollidingObjects));
+    // then delete it
+    delete this;
 }
 
 void Ball::applyCollisions(QPointF movement)
@@ -150,6 +175,12 @@ void Ball::applyCollisions(QPointF movement)
                             - 2 * normalVector * QPointF::dotProduct(oldSpeed, normalVector);
                     //qDebug() << "bong!  old speed =" << oldSpeed << " ; new speed =" << newSpeed;
                     setSpeed(newSpeed.x(), newSpeed.y());
+                    break;
+                }
+
+                case death:
+                {
+                    destroy();
                     break;
                 }
 

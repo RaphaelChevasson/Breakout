@@ -1,6 +1,6 @@
-#include "limitwall.h"
+#include "deathwall.h"
 
-LimitWall::LimitWall(ObjectsManager *pM, QPointF startPoint, QPointF endPoint)
+DeathWall::DeathWall(ObjectsManager *pM, QPointF startPoint, QPointF endPoint)
     : DisplayedObject(pM, startPoint.x(), startPoint.y()),
         // Workaround because DisplayedObject(...) should be called by
         // CollidingObject(...) initialisation list but it is not
@@ -15,23 +15,30 @@ LimitWall::LimitWall(ObjectsManager *pM, QPointF startPoint, QPointF endPoint)
 
     mStartPoint(startPoint), mEndPoint(endPoint)
 {
-
+    collisionEffect = death;
 }
 
-LimitWall::LimitWall(ObjectsManager *pM, float startPointX, float startPointY,
+DeathWall::DeathWall(ObjectsManager *pM, float startPointX, float startPointY,
                              float endPointX, float endPointY)
-    : LimitWall(pM, QPointF(startPointX, startPointY), QPointF(endPointX, endPointY))
+    : DeathWall(pM, QPointF(startPointX, startPointY), QPointF(endPointX, endPointY))
 {
 
 }
 
 
-void LimitWall::display()
+void DeathWall::display()
 {
-    // Draw a line (TODO: draw a texture ?)
+    // Draw a red line (TODO: draw a texture ?)
+
+    // disable lighting to permit full color control
+    glDisable(GL_LIGHTING);
 
     glBegin(GL_LINES);
+    glColor3f(1.0f, 0.0f, 0.0f); // red
     glVertex3f(mStartPoint.x(), mStartPoint.y(), 0.0f);
     glVertex3f(mEndPoint.x(),   mEndPoint.y(),   0.0f);
     glEnd();
+
+    // turn back lighting
+    glEnable(GL_LIGHTING);
 }
