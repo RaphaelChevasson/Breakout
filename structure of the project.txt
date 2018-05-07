@@ -2,12 +2,15 @@ ideas hierarchy is represented using indentation. Please read with notepad++ or 
 
 classes (please add a constructor using all fields (including inherited) and a destructor) :
 	DisplayedObject : class with virtual methods
-		fields : manager, x, y, width, height
+		fields : manager, x, y
 		methods : display(), destroy()
 	AnimatedObject : abstract class, inherits from DisplayedObject
 		methods : animate(totalTime, deltaTime)
 	CollidingObject : abstract class, inherits from DisplayedObject
-		fields : isMoving, hitBox (a list of points defining the hitBox of an object, used to check collision <- assume convexity ?)
+		fields :
+			isMoving
+			hitBox (a list of points defining the hitBox of an object, used to check collision <- assume convexity ?)
+			collisionEffect <- tell the other object what it have to do when there is a collision
 		methods :
 			checkIfItCollidesWith(otherObject) <- is behind all lines made by hitBox points (logical AND)
 			applyCollisionEffectTo(otherObject) <- make otherObject bounce (change velocity)
@@ -16,7 +19,7 @@ classes (please add a constructor using all fields (including inherited) and a d
 		methods : displayObjects(), animateObjects(), computeCollisions()
 	LimitWall : inherits from CollidingObject
 		fields : point A, point B
-		methods : the hitBox, x, y, width and height are determined in constructor thanks to A and B
+		methods : the hitBox, x and y are determined in constructor thanks to A and B
 	DeathWall : inherits from LimitWall
 		methods : applyCollisionEffectTo(otherObject) destroy otherObject (i.e. calls otherObject.Destroy())
 	Ball : inherits from AnimatedObject
