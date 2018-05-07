@@ -7,17 +7,17 @@ classes (please add a constructor using all fields (including inherited) and a d
 	AnimatedObject : abstract class, inherits from DisplayedObject
 		methods : animate(totalTime, deltaTime)
 	CollidingObject : abstract class, inherits from DisplayedObject
-		fields : isMoving, boundary (a list of points defining the boundary of an object, used to check collision <- assume convexity ?)
+		fields : isMoving, hitBox (a list of points defining the hitBox of an object, used to check collision <- assume convexity ?)
 		methods :
-			checkIfItCollidesWith(otherObject) <- is behind all lines made by boundary points (logical AND)
+			checkIfItCollidesWith(otherObject) <- is behind all lines made by hitBox points (logical AND)
 			applyCollisionEffectTo(otherObject) <- make otherObject bounce (change velocity)
 	ObjectsManager :
 		fields : DisplayedObjects, AnimatedObjects, CollidingObjects
 		methods : displayObjects(), animateObjects(), computeCollisions()
-	InvisibleWall : inherits from CollidingObject
+	LimitWall : inherits from CollidingObject
 		fields : point A, point B
-		methods : the boundary, x, y, width and height are determined in constructor thanks to A and B
-	DeathWall : inherits from InvisibleWall
+		methods : the hitBox, x, y, width and height are determined in constructor thanks to A and B
+	DeathWall : inherits from LimitWall
 		methods : applyCollisionEffectTo(otherObject) destroy otherObject (i.e. calls otherObject.Destroy())
 	Ball : inherits from AnimatedObject
 		fields player, xSpeed, ySpeed
