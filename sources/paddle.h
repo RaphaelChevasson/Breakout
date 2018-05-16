@@ -21,7 +21,6 @@ public:
     // Redefined inherited functions
     void animate (float Px, float Py) override;
     void display() override;
-    void destroy() override;
 
 private:
 
