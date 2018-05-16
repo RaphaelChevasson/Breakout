@@ -29,7 +29,9 @@ SOURCES += main.cpp \
     animatedobject.cpp \
     limitwall.cpp \
     gameglwidget.cpp \
-    deathwall.cpp
+    deathwall.cpp \
+    paddle.cpp \
+    brick.cpp
 HEADERS += \
     animatedobject.h \
     ball.h \
@@ -39,7 +41,10 @@ HEADERS += \
     collidingobject.h \
     limitwall.h \
     gameglwidget.h \
-    deathwall.h
+    deathwall.h \
+    paddle.h \
+    detectmotion.h \
+    brick.h
 
 RESOURCES += \
     textures.qrc
