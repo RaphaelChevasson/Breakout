@@ -115,11 +115,13 @@ void GameGLWidget::initializeGL()
     new Paddle(pM,pP,0,-8,8,2);// TODO: this will be in Level's constructor, and Level will be created in pG->Start()
 
     //make the brick
-    for(float i=-10;i<=10;i=i+3)
-        for(float j=0;j<10;j=j+1.5)
+
+    for(float i=-18;i<=18;i=i+4)
+        for(float j=5;j<20;j=j+2)
         {
-            new Brick(pM,pP,i,j,5,2);
+            new Brick(pM,pP,i,j,3,1);
         }
+
 
     new LimitWall(pM, -20, -20, -20,  20); // left limit wall  // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
     new LimitWall(pM, -20,  20,  20,  20); // up limit wall    // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
