@@ -27,9 +27,9 @@ const unsigned int WIN_HEIGHT = 900;
 const float ASPECT_RATIO      = static_cast<float>(WIN_WIDTH) / WIN_HEIGHT;
 const float MAX_DIMENSION     = 50.0f;
 // camera position
-const float camX = 0;
-const float camY = 0;
-const float camZ = 10;
+float camX = 0;
+float camY = 0;
+float camZ = 10;
 // time handling
 const float timeSpeed = 1;
 
@@ -241,6 +241,44 @@ void GameGLWidget::keyPressEvent(QKeyEvent * event)
         case Qt::Key_F2:
         {
             displayHitboxes = !displayHitboxes;
+            glFlush();
+            break;
+        }
+
+        // for debug purpose : Move the camera (keys)
+        case Qt::Key_Left:
+        {
+            camX--;
+            glFlush();
+            break;
+        }
+        case Qt::Key_Right:
+        {
+            camX++;
+            glFlush();
+            break;
+        }
+        case Qt::Key_Up:
+        {
+            camY++;
+            glFlush();
+            break;
+        }
+        case Qt::Key_Down:
+        {
+            camY--;
+            glFlush();
+            break;
+        }
+        case Qt::Key_Plus:
+        {
+            camZ--;
+            glFlush();
+            break;
+        }
+        case Qt::Key_Minus:
+        {
+            camZ++;
             glFlush();
             break;
         }
