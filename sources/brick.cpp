@@ -23,6 +23,9 @@ void Brick::display()
 
     // Diplay the brick
 
+    float w = mWidth/2;
+    float h = mHeigth/2;
+
     glBegin(GL_QUADS);
 
             GLfloat yellow[4] = {1.0f, 0.0f, 1.0f, 0.0f};
@@ -31,35 +34,35 @@ void Brick::display()
             glMaterialfv(GL_FRONT, GL_DIFFUSE, yellow);
 
 
-            glVertex3f(mX,mY, 0.0f);
-            glVertex3f(mX+mWidth, mY, 0.0f);
-            glVertex3f(mX+mWidth,mY+mHeigth, 0.0f);
-            glVertex3f(mX, mY+mHeigth, 0.0f);
+            glVertex3f(-w, -h, -h);
+            glVertex3f( w, -h, -h);
+            glVertex3f( w,  h, -h);
+            glVertex3f(-w,  h, -h);
 
-            glVertex3f(mX,mY, 3.0f);
-            glVertex3f(mX+mWidth, mY, 3.0f);
-            glVertex3f(mX+mWidth,mY+mHeigth, 3.0f);
-            glVertex3f(mX, mY+mHeigth, 3.0f);
+            glVertex3f(-w, -h,  h);
+            glVertex3f( w, -h,  h);
+            glVertex3f( w,  h,  h);
+            glVertex3f(-w,  h,  h);
 
-            glVertex3f(mX,mY, 0.0f);
-            glVertex3f(mX+mWidth, mY, 0.0f);
-            glVertex3f(mX+mWidth, mY, 3.0f);
-            glVertex3f(mX,mY, 3.0f);
+            glVertex3f(-w, -h, -h);
+            glVertex3f( w, -h, -h);
+            glVertex3f( w, -h,  h);
+            glVertex3f(-w, -h,  h);
 
-            glVertex3f(mX,mY+mHeigth, 0.0f);
-            glVertex3f(mX+mWidth, mY+mHeigth, 0.0f);
-            glVertex3f(mX+mWidth, mY+mHeigth, 3.0f);
-            glVertex3f(mX,mY+mHeigth, 3.0f);
+            glVertex3f(-w,  h, -h);
+            glVertex3f( w,  h, -h);
+            glVertex3f( w,  h,  h);
+            glVertex3f(-w,  h,  h);
 
-            glVertex3f(mX,mY, 0.0f);
-            glVertex3f(mX, mY+mHeigth, 0.0f);
-            glVertex3f(mX, mY+mHeigth, 3.0f);
-            glVertex3f(mX,mY, 3.0f);
+            glVertex3f(-w, -h, -h);
+            glVertex3f(-w,  h, -h);
+            glVertex3f(-w,  h,  h);
+            glVertex3f(-w, -h,  h);
 
-            glVertex3f(mX+mWidth,mY, 0.0f);
-            glVertex3f(mX+mWidth,mY+mHeigth, 0.0f);
-            glVertex3f(mX+mWidth, mY+mHeigth, 3.0f);
-            glVertex3f(mX+mWidth,mY, 3.0f);
+            glVertex3f( w, -h, -h);
+            glVertex3f( w,  h, -h);
+            glVertex3f( w,  h,  h);
+            glVertex3f( w, -h,  h);
 
     glEnd();
 
