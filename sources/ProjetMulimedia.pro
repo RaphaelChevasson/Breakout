@@ -31,7 +31,9 @@ SOURCES += main.cpp \
     gameglwidget.cpp \
     deathwall.cpp \
     paddle.cpp \
-    brick.cpp
+    brick.cpp \
+    detmotion.cpp
+
 HEADERS += \
     animatedobject.h \
     ball.h \
@@ -43,8 +45,19 @@ HEADERS += \
     gameglwidget.h \
     deathwall.h \
     paddle.h \
-    detectmotion.h \
-    brick.h
+    brick.h \
+    detmotion.h
 
 RESOURCES += \
     textures.qrc
+
+FORMS +=
+
+INCLUDEPATH +=$$(OPENCV_DIR)\..\..\include
+
+LIBS += -L$$(OPENCV_DIR)\lib \
+    -lopencv_core2413 \
+    -lopencv_highgui2413 \
+    -lopencv_imgproc2413 \
+    -lopencv_features2d2413 \
+    -lopencv_calib3d2413

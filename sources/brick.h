@@ -18,8 +18,8 @@ public:
          float x, float y, float width,float heigth);
 
     // Redefined inherited functions
-    //void animate (float Px, float Py) override;
 
+    //void destroy() override;
     void display() override;
 
 private:

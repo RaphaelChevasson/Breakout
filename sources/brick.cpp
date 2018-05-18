@@ -28,10 +28,9 @@ void Brick::display()
 
     glBegin(GL_QUADS);
 
-            GLfloat yellow[4] = {1.0f, 0.0f, 1.0f, 0.0f};
-            GLfloat white[4] = {1.0f, 1.0f, 0.0f, 1.0f};
-            glMaterialfv(GL_FRONT, GL_AMBIENT, white);
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, yellow);
+            GLfloat gris[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+            glMaterialfv(GL_FRONT, GL_AMBIENT, gris);
+
 
 
             glVertex3f(-w, -h, -h);
