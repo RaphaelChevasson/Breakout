@@ -49,8 +49,6 @@ DetectMotion::DetectMotion()
     int height=webCam_->get(CV_CAP_PROP_FRAME_HEIGHT);
     qDebug()<<endl<<"Video ok, image is "<<width<<"x"<<height<<endl;
 
-    //webCam_->set(CV_CAP_PROP_FRAME_WIDTH,frameWidth);
-    //webCam_->set(CV_CAP_PROP_FRAME_HEIGHT,frameHeight);
     qDebug()<<"4"<<endl;
 
     // Widget size and position setup
@@ -75,9 +73,8 @@ DetectMotion::DetectMotion()
     cv::flip(frame1,frame1,1);
     // Extract rect1 and convert to gray
     cv::cvtColor(Mat(frame1,workingRect),frameRect1,COLOR_BGR2GRAY);
-    //Mat(frame1,rect).copyTo(frameRect1);
+    GaussianBlur(frameRect1, frameRect1, Size(3, 3), 1);
 
-    // Create the matchTemplate image result
     int result_cols = frame1.cols-templateWidth  + 1;
     int result_rows = frame1.rows-templateHeight + 1;
     resultImage.create( result_cols, result_rows, CV_32FC1 );
@@ -102,6 +99,7 @@ void DetectMotion::computeDetection()
         cv::flip(frame2,frame2,1);
         // Extract working rect in frame2 and convert to gray
         cv::cvtColor(Mat(frame2,workingRect),frameRect2,COLOR_BGR2GRAY);
+        GaussianBlur(frameRect2, frameRect2, Size(3, 3), 1);
 
         // Extract template image in frame1
         Mat templateImage(frameRect1,templateRect);
@@ -111,7 +109,7 @@ void DetectMotion::computeDetection()
         double minVal; double maxVal; Point minLoc; Point maxLoc;
         minMaxLoc( resultImage, &minVal, &maxVal, &minLoc, &maxLoc);
         // Compute the translation vector between the origin and the matching rect
-        Point vect(maxLoc.x-templateRect.x,maxLoc.y-templateRect.y);
+        Point vect(maxLoc.x,maxLoc.y-templateRect.y);
 
         // Draw green rectangle and the translation vector
         rectangle(frame2,workingRect,Scalar( 0, 255, 0),2);
