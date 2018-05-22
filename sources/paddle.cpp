@@ -5,12 +5,14 @@
 
 // Constructor
 Paddle::Paddle(ObjectsManager *pM, Player *pPlayer,
-         float x, float y, float width,float heigth)
+               DetectMotion *pDetectMotion,
+               float x, float y, float width,float heigth)
 
     : DisplayedObject(pM, x, y),
       AnimatedObject(pM, x, y),
       CollidingObject(pM, x, y, width, heigth),
-      mpPlayer(pPlayer), mWidth(width),mHeigth(heigth)
+      mpPlayer(pPlayer), mWidth(width),mHeigth(heigth),
+      mpDetectMotion(pDetectMotion)
 {
     // Create the quadric
     mpQuadric = gluNewQuadric();

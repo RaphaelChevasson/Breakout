@@ -6,6 +6,7 @@
 #include <QtGui/qopengl.h>
 #include <cmath>
 #include <random>
+#include <QtConcurrent/QtConcurrentRun>
 #include <QDebug>
 
 #include "gameglwidget.h"
@@ -42,7 +43,7 @@ bool displayHitboxes = false;
 
 // Constructor
 GameGLWidget::GameGLWidget(QWidget * parent)
-    : QGLWidget(parent)
+    : QOpenGLWidget(parent)
 {
     // Widget size and position setup
     setFixedSize(WIN_WIDTH, WIN_HEIGHT);
@@ -52,6 +53,9 @@ GameGLWidget::GameGLWidget(QWidget * parent)
     connect(&m_AnimationTimer,  &QTimer::timeout, [&] {
         m_TimeElapsed += timeSpeed / 100.0f;
 
+        // Camera detection
+        DetectMotion::displayImage();
+
         // Annimation
         for (AnimatedObject *o : pM->AnimatedObjects) // access by reference to avoid copying
         {
@@ -59,7 +63,7 @@ GameGLWidget::GameGLWidget(QWidget * parent)
         }
 
         // Display
-        updateGL();
+        update();
 
         m_LastTimeElapsed = m_TimeElapsed;
     });
@@ -109,10 +113,10 @@ void GameGLWidget::initializeGL()
 
     pM = new ObjectsManager();
     Player *pP = new Player();
+    mpDetectMotion = new DetectMotion();
 
-    new Ball(pM,pP,1,2,3,3,7); // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
-    new Ball(pM,pP,1,-2,3,4,-8); // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
-    new Paddle(pM,pP,0,-8,8,2);// TODO: this will be in Level's constructor, and Level will be created in pG->Start()
+    new Ball(pM,pP,0,-10,1.5,2,20); // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
+    new Paddle(pM,pP,mpDetectMotion,0,-17,8,1.5);// TODO: this will be in Level's constructor, and Level will be created in pG->Start()
 
     //make the brick
 
@@ -129,6 +133,9 @@ void GameGLWidget::initializeGL()
     new DeathWall(pM,  20, -20, -20, -20); // down limit wall  // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
 
     // End of the basic level setup
+
+    // Launch camera detection loop in another thread
+    QFuture<void> future = QtConcurrent::run(*mpDetectMotion, &DetectMotion::computeDetection);
 }
 
 
@@ -296,5 +303,5 @@ void GameGLWidget::keyPressEvent(QKeyEvent * event)
 
     // Accept the event and update the scene
     event->accept();
-    updateGL();
+    update();
 }

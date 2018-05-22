@@ -1,19 +1,38 @@
 #include <QApplication>
+#include <QLayout>
+#include <QLabel>
 #include <ctime>
 #include "gameglwidget.h"
+#include "detectmotion.h"
 
 int main(int argc, char *argv[])
 {
-    // Initialisation du generateur de nombres aleatoires
+    // Initialise Random Numer generator
     srand(time(nullptr));
 
-    // Creation de l'application QT
+    // Create QT application
     QApplication app(argc, argv);
-	
-	// Creation du widget opengl
-    GameGLWidget glWidget;
-    glWidget.show();
 
-    // Execution de l'application QT
+    QWidget window;
+
+    // Create OpenGL (for 3D game scene) and Label (for camera display) widgets
+    QLabel *pCameraLabel = new QLabel;
+    DetectMotion::init(pCameraLabel);
+
+    GameGLWidget *glWidget = new GameGLWidget();
+
+    // Add them to the main window
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(pCameraLabel);
+    layout->addWidget(glWidget);
+    window.setLayout(layout);
+
+    //camWidget->computeDetection();
+
+    //camWidget.show();
+    //glWidget.show();
+    window.show();
+
+    // Execute QT application
     return app.exec();
 }

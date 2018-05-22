@@ -17,7 +17,7 @@ unix {
 
 
 # nom de l'exe genere
-TARGET 	  = TD5
+TARGET 	  = ProjetMultimedia
 
 # fichiers sources/headers/ressources
 SOURCES += main.cpp \
@@ -32,7 +32,7 @@ SOURCES += main.cpp \
     deathwall.cpp \
     paddle.cpp \
     brick.cpp \
-    detmotion.cpp
+    detectmotion.cpp
 
 HEADERS += \
     animatedobject.h \
@@ -46,7 +46,7 @@ HEADERS += \
     deathwall.h \
     paddle.h \
     brick.h \
-    detmotion.h
+    detectmotion.h
 
 RESOURCES += \
     textures.qrc

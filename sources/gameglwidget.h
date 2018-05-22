@@ -1,7 +1,9 @@
 #ifndef MYGLWIDGET_H
 #define MYGLWIDGET_H
 
-#include <QGLWidget>
+#include "detectmotion.h"
+
+#include <QOpenGLWidget>
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QKeyEvent>
@@ -11,7 +13,7 @@
 
 // Widget dedicated to display the OpenGL game's scene.
 // @autor RaphaelChevasson (modification of OpenGL labs' code)
-class GameGLWidget : public QGLWidget
+class GameGLWidget : public QOpenGLWidget
 {
     Q_OBJECT
 
@@ -43,6 +45,9 @@ private:
     float m_TimeElapsed { 0.0f };
     float m_LastTimeElapsed { 0.0f };
     QTimer m_AnimationTimer;
+
+    // Paddle camera controller
+    DetectMotion *mpDetectMotion;
 };
 
 #endif // MYGLWIDGET_H
