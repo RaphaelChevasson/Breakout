@@ -183,7 +183,17 @@ void Ball::applyCollisions(QPointF movement)
                     setSpeed(newSpeed.x(), newSpeed.y());
                     break;
                 }
-
+                case bouncePalet:
+                {
+                    // find vector normal to the bouncing surface
+                    QLineF normalLine = QLineF(withSegment).normalVector().unitVector();
+                    float oldSpeedNorm = pow(pow(getXSpeed(),2) + pow(getYSpeed(),2), 0.5);
+                    float w = withSegment.dx();
+                    float directionX = (collisionPoint.x() - (withSegment.p1().x()+withSegment.p2().x())/2.0f)*2/w;
+                    QPointF newSpeed = QPointF(directionX, 1.0f) * oldSpeedNorm;
+                    setSpeed(newSpeed.x(), newSpeed.y());
+                    break;
+                }
                 case death:
                 {
                     destroy();

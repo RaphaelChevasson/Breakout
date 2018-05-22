@@ -17,6 +17,7 @@ Paddle::Paddle(ObjectsManager *pM, Player *pPlayer,
       mpPlayer(pPlayer), mWidth(width),mHeigth(heigth)
 
 {
+    collisionEffect = bouncePalet;
     // Create the quadric
     mpQuadric = gluNewQuadric();
     mpDetectMotion=pDetectMotion;
