@@ -81,7 +81,7 @@ void Ball::destroy()
                             this),
                 std::end(mpM->CollidingObjects));
     // then delete it
-    delete this;
+    //delete this;
 }
 
 void Ball::applyCollisions(QPointF movement)

@@ -18,7 +18,7 @@ Level::Level(ObjectsManager *pM, Player *pP, DetectMotion *pD,
     // Make the Bricks :
     for(float i=-18; i<=18; i=i+4)
     {
-        for(float j=5; j<20; j=j+2)
+        for(float j=-3; j<20; j=j+2)
         {
             new Brick(pM, pP, i, j, 3, 1);
         }

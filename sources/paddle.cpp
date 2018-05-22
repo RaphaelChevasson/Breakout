@@ -24,10 +24,9 @@ Paddle::Paddle(ObjectsManager *pM, Player *pPlayer,
 
 void Paddle::animate(float /*totalTime*/, float deltaTime)
 {
-    if ((mX+mpDetectMotion->dX* deltaTime*3<=15)&&(mX+mpDetectMotion->dX* deltaTime*3>=-15))
-    {
-        mX += mpDetectMotion->dX* deltaTime*3;
-    }
+    mX += mpDetectMotion->dX* deltaTime*3;
+    if (mX>=16) { mX = 16; }
+    if (mX<=-16){ mX = -16; }
 
     //qDebug() << mX;
     //qDebug() << mpDetectMotion->dX;
