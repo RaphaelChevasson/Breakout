@@ -15,11 +15,8 @@
 #include "animatedobject.h"
 #include "collidingobject.h"
 #include "player.h"
-#include "ball.h"
-#include "limitwall.h"
-#include "deathwall.h"
-#include "paddle.h"
-#include "brick.h"
+#include "game.h"
+
 
 // Constants declaration :
 // screen shape
@@ -108,31 +105,10 @@ void GameGLWidget::initializeGL()
     GLfloat modelAmbiantColor[4] = {0.0f, 0.0f, 0.0f, 1.0f};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, modelAmbiantColor); // 0.2, 0.2, 0.2 par défaut
 
-
-    // Test of a basic level setup
-
+    // Create gameplay elements
     pM = new ObjectsManager();
-    Player *pP = new Player();
     mpDetectMotion = new DetectMotion();
-
-    new Ball(pM,pP,0,-10,1.5,2,20); // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
-    new Paddle(pM,pP,mpDetectMotion,0,-17,8,1.5);// TODO: this will be in Level's constructor, and Level will be created in pG->Start()
-
-    //make the brick
-
-    for(float i=-18;i<=18;i=i+4)
-        for(float j=5;j<20;j=j+2)
-        {
-            new Brick(pM,pP,i,j,3,1);
-        }
-
-
-    new LimitWall(pM, -20, -20, -20,  20); // left limit wall  // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
-    new LimitWall(pM, -20,  20,  20,  20); // up limit wall    // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
-    new LimitWall(pM,  20,  20,  20, -20); // right limit wall // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
-    new DeathWall(pM,  20, -20, -20, -20); // down limit wall  // TODO: this will be in Level's constructor, and Level will be created in pG->Start()
-
-    // End of the basic level setup
+    Game *g = new Game(pM, pD);
 
     // Launch camera detection loop in another thread
     QFuture<void> future = QtConcurrent::run(*mpDetectMotion, &DetectMotion::computeDetection);

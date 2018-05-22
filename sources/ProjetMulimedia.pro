@@ -32,7 +32,9 @@ SOURCES += main.cpp \
     deathwall.cpp \
     paddle.cpp \
     brick.cpp \
-    detectmotion.cpp
+    detectmotion.cpp \
+    level.cpp \
+    game.cpp
 
 HEADERS += \
     animatedobject.h \
@@ -46,7 +48,9 @@ HEADERS += \
     deathwall.h \
     paddle.h \
     brick.h \
-    detectmotion.h
+    detectmotion.h \
+    level.h \
+    game.h
 
 RESOURCES += \
     textures.qrc
