@@ -1,5 +1,6 @@
 #include "game.h"
 #include "player.h"
+#include "level.h"
 
 
 Game::Game(ObjectsManager *pM, DetectMotion *pD)

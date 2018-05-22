@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef OBJECTMANAGER_H
+#define OBJECTMANAGER_H
 
 #include<vector>
 
@@ -22,4 +22,4 @@ public:
     std::vector<CollidingObject*> CollidingObjects;
 };
 
-#endif // GAME_H
+#endif // OBJECTMANAGER_H
