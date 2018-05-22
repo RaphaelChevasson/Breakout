@@ -12,7 +12,7 @@ class Ball; // forward declaration to break circular dependency
 
 // Small enumeration to help identify collision type
 // @autor RaphaelChevasson
-enum CollisionEffect {bounce, bouncePalet, death};
+enum CollisionEffect {bounce, bouncePalet, bounceAndDestroy, death};
 
 
 // DisplayedObject who can collide with each other.

@@ -24,9 +24,9 @@ public:
 
 
     // Redefined inherited functions
-    void animate (float totalTime, float deltaTime) override;
+    void animate (float totalTime, float deltaTime) override; // contains collision code
     void display() override;
-    void destroy() override;
+    void destroy() override; // also make Player loose health
 
 private:
     // Owner of the ball

@@ -162,6 +162,12 @@ void Ball::applyCollisions(QPointF movement)
 
             switch(pco->collisionEffect)
             {
+                case bounceAndDestroy:
+                {
+                    // Destroy the other object :
+                    pco->destroy();
+                    // no break -> also use bounce effect
+                }
                 case bounce:
                 {
                     // Bounce along line :

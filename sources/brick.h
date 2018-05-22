@@ -19,7 +19,7 @@ public:
 
     // Redefined inherited functions
 
-    //void destroy() override;
+    void destroy() override; // also notice the Level
     void display() override;
 
 private:

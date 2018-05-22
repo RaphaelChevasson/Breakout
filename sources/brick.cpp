@@ -11,6 +11,7 @@ Brick::Brick(ObjectsManager *pM, Player *pPlayer,
       CollidingObject(pM, x, y, width, heigth),
       mpPlayer(pPlayer), mWidth(width),mHeigth(heigth)
 {
+    collisionEffect = bounceAndDestroy;
     // Create the quadric
     mpQuadric = gluNewQuadric();
 }
@@ -65,4 +66,27 @@ void Brick::display()
 
     glEnd();
 
+}
+
+// notice the level and destroy the ball
+void Brick::destroy()
+{
+    // make the player loose health
+    // TODO: notice level
+    qDebug() << "Crack !";
+
+    // Destroy the brick :
+    // first make sure nobody can access it
+    mpM->DisplayedObjects.erase(
+                std::remove(std::begin(mpM->DisplayedObjects),
+                            std::end(mpM->DisplayedObjects),
+                            this),
+                std::end(mpM->DisplayedObjects));
+    mpM->CollidingObjects.erase(
+                std::remove(std::begin(mpM->CollidingObjects),
+                            std::end(mpM->CollidingObjects),
+                            this),
+                std::end(mpM->CollidingObjects));
+    // then delete it
+    delete this;
 }
