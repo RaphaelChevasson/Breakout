@@ -10,7 +10,7 @@
 #include "deathwall.h"
 
 Level::Level(ObjectsManager *pM, Player *pP, DetectMotion *pD,
-             float difficulty = 1)
+             float difficulty /* = 1 */)
 {
     new Ball(pM, pP, 0, -10, 1.5, 2, 20*difficulty);
     new Paddle(pM, pP, pD, 0, -17, 8, 1.5);

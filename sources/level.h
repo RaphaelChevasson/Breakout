@@ -3,6 +3,10 @@
 
 #include<vector>
 
+#include "objectsmanager.h"
+#include "detectmotion.h"
+#include "player.h"
+
 class Game; // forward declaration to break circular dependency
 class Brick; // forward declaration to break circular dependency
 

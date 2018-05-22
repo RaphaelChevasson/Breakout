@@ -108,7 +108,7 @@ void GameGLWidget::initializeGL()
     // Create gameplay elements
     pM = new ObjectsManager();
     mpDetectMotion = new DetectMotion();
-    Game *g = new Game(pM, pD);
+    Game *g = new Game(pM, mpDetectMotion);
 
     // Launch camera detection loop in another thread
     QFuture<void> future = QtConcurrent::run(*mpDetectMotion, &DetectMotion::computeDetection);
