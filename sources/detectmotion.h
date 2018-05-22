@@ -17,7 +17,7 @@ using namespace cv;
 class DetectMotion
 {
 public:
-    float dX = 0, dY = 0;
+    static float dX, dY;
     DetectMotion();
     void computeDetection();
 

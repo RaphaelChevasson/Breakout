@@ -20,8 +20,8 @@
 
 // Constants declaration :
 // screen shape
-const unsigned int WIN_WIDTH  = 1600;
-const unsigned int WIN_HEIGHT = 900;
+const unsigned int WIN_WIDTH  = 1000;
+const unsigned int WIN_HEIGHT = 600;
 const float ASPECT_RATIO      = static_cast<float>(WIN_WIDTH) / WIN_HEIGHT;
 const float MAX_DIMENSION     = 50.0f;
 // camera position

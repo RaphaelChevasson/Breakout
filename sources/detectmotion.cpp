@@ -12,6 +12,8 @@ using namespace std;
 
 QLabel *DetectMotion::pCameraDisplay = nullptr;
 QImage *DetectMotion::pImageToDisplay = nullptr;
+float DetectMotion::dX=0;
+float DetectMotion::dY=0;
 
 DetectMotion::DetectMotion()
 {
@@ -91,15 +93,17 @@ void DetectMotion::computeDetection()
     // /--------------------------------------------------------------------------
     //   Other images ; goal = display and process images
 
-   while (waitKey(1000)<0)
+   while (waitKey(5)<0)
     {
         // Get frame2
         *webCam_ >> frame2;
         // Mirror effect
         cv::flip(frame2,frame2,1);
+
         // Extract working rect in frame2 and convert to gray
         cv::cvtColor(Mat(frame2,workingRect),frameRect2,CV_BGR2GRAY);
         GaussianBlur(frameRect2, frameRect2, Size(3, 3), 1);
+
 
         // Extract template image in frame1
         Mat templateImage(frameRect1,templateRect);
@@ -110,15 +114,16 @@ void DetectMotion::computeDetection()
         minMaxLoc( resultImage, &minVal, &maxVal, &minLoc, &maxLoc);
         // Compute the translation vector between the origin and the matching rect
         Point vect(maxLoc.x-templateRect.x,maxLoc.y-templateRect.y);
-
+        // update value of paddle;
+        DetectMotion::dX=vect.x;
+        DetectMotion::dY=vect.y;
         // Draw green rectangle and the translation vector
-        rectangle(frame2,workingRect,Scalar( 0, 255, 0),2);
+        rectangle(frame2,workingRect,Scalar(0, 255, 0),2);
         Point p(workingCenter.x+vect.x,workingCenter.y);
         arrowedLine(frame2,workingCenter,p,Scalar(255,255,255),2);
 
         // Update image to display with frame2
         updateImage(frame2);
-
         // Swap matrixes
         swap(frameRect1,frameRect2);
     }

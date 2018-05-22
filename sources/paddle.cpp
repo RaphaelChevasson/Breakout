@@ -2,6 +2,9 @@
 #include "qdebug.h"
 #include "player.h"
 #include "detectmotion.h"
+#include <iostream>>
+
+using namespace std;
 
 // Constructor
 Paddle::Paddle(ObjectsManager *pM, Player *pPlayer,
@@ -11,17 +14,23 @@ Paddle::Paddle(ObjectsManager *pM, Player *pPlayer,
     : DisplayedObject(pM, x, y),
       AnimatedObject(pM, x, y),
       CollidingObject(pM, x, y, width, heigth),
-      mpPlayer(pPlayer), mWidth(width),mHeigth(heigth),
-      mpDetectMotion(pDetectMotion)
+      mpPlayer(pPlayer), mWidth(width),mHeigth(heigth)
+
 {
     // Create the quadric
     mpQuadric = gluNewQuadric();
+    mpDetectMotion=pDetectMotion;
 }
 
-void Paddle::animate(float totalTime, float deltaTime)
+void Paddle::animate(float /*totalTime*/, float deltaTime)
 {
-    //mX = detectMotion.getdX();
-    mX += 1 * deltaTime;
+    if ((mX+mpDetectMotion->dX* deltaTime*3<=15)&&(mX+mpDetectMotion->dX* deltaTime*3>=-15))
+    {
+        mX += mpDetectMotion->dX* deltaTime*3;
+    }
+
+    //qDebug() << mX;
+    //qDebug() << mpDetectMotion->dX;
 }
 
 // display the paddle
